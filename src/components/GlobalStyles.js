@@ -28,7 +28,7 @@ h2{
 h3{
     font-size: 1.1rem;
     color: #333;
-    padding:1rem;
+    padding:1rem 0rem;
 }
 p{
     line-height: 200%;
