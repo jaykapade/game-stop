@@ -1,8 +1,8 @@
 import { GET_DETAILS } from '../constants/gamesConstant'
 
 const initState = {
-  game: {},
-  screenshots: {},
+  game: { platforms: [] },
+  screenshots: { results: [] },
 }
 
 const detailReducer = (state = initState, action) => {

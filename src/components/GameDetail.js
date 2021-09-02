@@ -2,7 +2,7 @@ import React from 'react'
 //Styling
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const GameDetail = () => {
@@ -10,6 +10,9 @@ const GameDetail = () => {
   return (
     <CardShadow>
       <Detail>
+        <Link to="/">
+          <BackButton>&laquo; Back</BackButton>
+        </Link>
         <Stats>
           <div className="rating">
             <h3>{game.name}</h3>
@@ -19,7 +22,7 @@ const GameDetail = () => {
             <h3>Platforms</h3>
             <Platforms>
               {game.platforms.map((data) => (
-                <h3>{data.platform.name}</h3>
+                <h3 key={data.platform.id}>{data.platform.name}</h3>
               ))}
             </Platforms>
           </Info>
@@ -104,6 +107,18 @@ const Description = styled(motion.div)`
 const Gallery = styled(motion.div)`
   img {
     margin-bottom: 2rem;
+  }
+`
+const BackButton = styled(motion.div)`
+  display: inline;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid gray;
+  font-weight: 500;
+  transition: 0.3s ease;
+  &:hover {
+    background-color: #080808;
+    color: white;
   }
 `
 
