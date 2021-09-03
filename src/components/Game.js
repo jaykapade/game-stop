@@ -11,7 +11,9 @@ const Game = ({ name, released, image, id }) => {
   const dispatch = useDispatch()
 
   const loadDetailhandler = () => {
-    console.log(id)
+    //Used to remove background games page scrolling when gamedetails page is open
+    document.body.style.overflow = 'hidden'
+    // console.log(id)
     dispatch(loadDetail(id))
   }
   return (
