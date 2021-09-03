@@ -6,44 +6,46 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const GameDetail = () => {
-  const { screenshots, game } = useSelector((state) => state.detail)
+  const { screenshots, game, isLoading } = useSelector((state) => state.detail)
   return (
     <CardShadow>
-      <Detail>
-        <Link to="/">
-          <BackButton>&laquo; Back</BackButton>
-        </Link>
-        <Stats>
-          <div className="rating">
-            <h3>{game.name}</h3>
-            <p>Rating: {game.rating}</p>
-          </div>
-          <Info>
-            <h3>Platforms</h3>
-            <Platforms>
-              {game.platforms.map((data) => (
-                <h3 key={data.platform.id}>{data.platform.name}</h3>
-              ))}
-            </Platforms>
-          </Info>
-        </Stats>
-        <Media>
-          <img src={game.background_image} alt={game.background_image} />
-        </Media>
-        <Description>
-          <p>{game.description_raw}</p>
-        </Description>
+      <Link to="/">
+        <BackButton>&#9932;</BackButton>
+      </Link>
+      {!isLoading && (
+        <Detail>
+          <Stats>
+            <div className="rating">
+              <h3>{game.name}</h3>
+              <p>Rating: {game.rating}</p>
+            </div>
+            <Info>
+              <h3>Platforms</h3>
+              <Platforms>
+                {game.platforms.map((data) => (
+                  <h3 key={data.platform.id}>{data.platform.name}</h3>
+                ))}
+              </Platforms>
+            </Info>
+          </Stats>
+          <Media>
+            <img src={game.background_image} alt={game.background_image} />
+          </Media>
+          <Description>
+            <p>{game.description_raw}</p>
+          </Description>
 
-        <Gallery>
-          {screenshots.results.map((screenshot) => (
-            <img
-              src={screenshot.image}
-              alt={screenshot.image}
-              key={screenshot.id}
-            />
-          ))}
-        </Gallery>
-      </Detail>
+          <Gallery>
+            {screenshots.results.map((screenshot) => (
+              <img
+                src={screenshot.image}
+                alt={screenshot.image}
+                key={screenshot.id}
+              />
+            ))}
+          </Gallery>
+        </Detail>
+      )}
     </CardShadow>
   )
 }
@@ -53,6 +55,7 @@ const CardShadow = styled(motion.div)`
   min-height: 100vh;
   overflow-y: scroll;
   background: rgba(0, 0, 0, 0.5);
+
   position: fixed;
   top: 0;
   left: 0;
@@ -110,15 +113,21 @@ const Gallery = styled(motion.div)`
   }
 `
 const BackButton = styled(motion.div)`
-  display: inline;
+  top: 2%;
+  right: 2%;
+  display: inline-block;
+  position: fixed;
+
   padding: 0.5rem 0.8rem;
   border-radius: 0.5rem;
   border: 1px solid gray;
   font-weight: 500;
+  color: white;
+  background-color: #080808;
   transition: 0.3s ease;
   &:hover {
-    background-color: #080808;
-    color: white;
+    background-color: white;
+    color: black;
   }
 `
 
