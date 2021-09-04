@@ -9,8 +9,9 @@ import { useLocation } from 'react-router-dom'
 //Styling
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import cancel from '../logos/cancel.png'
+import cancel from '../logos/cancel.svg'
 import { CLEAR_SEARCH_RESULTS } from '../redux/constants/gamesConstant'
+import { fadeIn } from '../animations'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -30,7 +31,7 @@ const Home = () => {
   }
 
   return (
-    <GameList>
+    <GameList variants={fadeIn} initial="hidden" animate="show">
       {gameId && <GameDetail />}
       {searched.length ? (
         <SearchResults>
@@ -112,9 +113,9 @@ const Games = styled(motion.div)`
 const SearchResults = styled(motion.div)`
   h2 {
     img {
-      margin-left: 1rem;
-      width: 1.5rem;
-      height: 1.5rem;
+      margin-left: 0.5rem;
+      width: 1rem;
+      height: 1rem;
     }
   }
 `

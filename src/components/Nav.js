@@ -9,6 +9,8 @@ import { fetchSearchedGames } from '../redux/actions/gamesAction'
 import { useDispatch } from 'react-redux'
 import { CLEAR_SEARCH_RESULTS } from '../redux/constants/gamesConstant'
 
+import { fadeIn } from '../animations'
+
 const Nav = () => {
   const dispatch = useDispatch()
   const [input, setInput] = useState('')
@@ -17,12 +19,8 @@ const Nav = () => {
     dispatch(fetchSearchedGames(input))
   }
 
-  const clearSearchHandler = () => {
-    dispatch({ type: CLEAR_SEARCH_RESULTS })
-  }
-
   return (
-    <StyledNav>
+    <StyledNav variants={fadeIn} initial="hidden" animate="show">
       <Logo>
         <img src={logo} alt="logo" />
         <h1>GameStop</h1>
