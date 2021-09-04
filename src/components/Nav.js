@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 //Styling
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 import logo from '../logos/logo.gif'
 
+import { fetchSearchedGames } from '../redux/actions/gamesAction'
+import { useDispatch } from 'react-redux'
+import { CLEAR_SEARCH_RESULTS } from '../redux/constants/gamesConstant'
+
 const Nav = () => {
+  const dispatch = useDispatch()
+  const [input, setInput] = useState('')
+
+  const searchHandler = () => {
+    dispatch(fetchSearchedGames(input))
+  }
+
+  const clearSearchHandler = () => {
+    dispatch({ type: CLEAR_SEARCH_RESULTS })
+  }
+
   return (
     <StyledNav>
       <Logo>
@@ -13,8 +28,13 @@ const Nav = () => {
         <h1>GameStop</h1>
       </Logo>
       <div className="search">
-        <input type="text" />
-        <button>Search</button>
+        <input
+          type="text"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && searchHandler()}
+          value={input}
+        />
+        <button onClick={searchHandler}>Search</button>
       </div>
     </StyledNav>
   )

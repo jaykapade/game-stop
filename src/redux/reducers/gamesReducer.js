@@ -1,9 +1,14 @@
-import { FETCH_GAMES } from '../constants/gamesConstant'
+import {
+  CLEAR_SEARCH_RESULTS,
+  FETCH_GAMES,
+  FETCH_SEARCHED_GAME,
+} from '../constants/gamesConstant'
 
 const initState = {
   popular: [],
   newGames: [],
   upcoming: [],
+  searched: [],
 }
 
 const gamesReducer = (state = initState, action) => {
@@ -15,6 +20,17 @@ const gamesReducer = (state = initState, action) => {
         newGames: action.payload.newGames,
         upcoming: action.payload.upcoming,
       }
+    case FETCH_SEARCHED_GAME:
+      return {
+        ...state,
+        searched: action.payload.searched,
+      }
+    case CLEAR_SEARCH_RESULTS:
+      return {
+        ...state,
+        searched: [],
+      }
+
     default:
       return { ...state }
   }

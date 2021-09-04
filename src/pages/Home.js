@@ -9,6 +9,8 @@ import { useLocation } from 'react-router-dom'
 //Styling
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
+import cancel from '../logos/cancel.png'
+import { CLEAR_SEARCH_RESULTS } from '../redux/constants/gamesConstant'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -19,11 +21,38 @@ const Home = () => {
     dispatch(loadGames())
   }, [dispatch])
 
-  const { popular, newGames, upcoming } = useSelector((state) => state.games)
+  const { popular, newGames, upcoming, searched } = useSelector(
+    (state) => state.games,
+  )
+
+  const clearSearchHandler = () => {
+    dispatch({ type: CLEAR_SEARCH_RESULTS })
+  }
 
   return (
     <GameList>
       {gameId && <GameDetail />}
+      {searched.length ? (
+        <SearchResults>
+          <h2 style={{ display: 'inline-flex' }}>
+            Searched Games{' '}
+            <img src={cancel} alt="cancel" onClick={clearSearchHandler} />
+          </h2>
+          <Games>
+            {searched.map((game) => (
+              <Game
+                name={game.name}
+                released={game.released}
+                id={game.id}
+                image={game.background_image}
+                key={game.id}
+              />
+            ))}
+          </Games>
+        </SearchResults>
+      ) : (
+        ''
+      )}
 
       <h2>Upcoming Games</h2>
       <Games>
@@ -80,5 +109,13 @@ const Games = styled(motion.div)`
   grid-column-gap: 2rem;
   grid-row-gap: 2rem;
 `
-
+const SearchResults = styled(motion.div)`
+  h2 {
+    img {
+      margin-left: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+`
 export default Home
