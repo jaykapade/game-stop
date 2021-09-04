@@ -7,14 +7,59 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { resizeImage } from '../util'
 
+//Logo Images
+import playstation from '../logos/playstation.svg'
+import steam from '../logos/steam.svg'
+import xbox from '../logos/xbox.svg'
+import nintendo from '../logos/nintendo.svg'
+import apple from '../logos/apple.svg'
+import gamepad from '../logos/gamepad.svg'
+
+//Star Images
+import starEmpty from '../logos/star-empty.png'
+import starFull from '../logos/star-full.png'
+
 const GameDetail = () => {
   const history = useHistory()
+
   //Exit GameDetail Page
   const exitDetailHandler = (e) => {
     const element = e.target
     if (element.classList.contains('shadow')) {
       document.body.style.overflow = 'auto'
       history.push('/')
+    }
+  }
+
+  //Ratings
+  const getRatings = () => {
+    const stars = []
+    const rating = Math.floor(game.rating)
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<img alt="star" key={i} src={starFull} />)
+      } else {
+        stars.push(<img alt="star" key={i} src={starEmpty} />)
+      }
+    }
+    return stars
+  }
+
+  //Platform images
+  const getPlatform = (platform) => {
+    switch (platform) {
+      case 'PlayStation 4':
+        return playstation
+      case 'Xbox One':
+        return xbox
+      case 'PC':
+        return steam
+      case 'Nintendo Switch':
+        return nintendo
+      case 'iOS':
+        return apple
+      default:
+        return gamepad
     }
   }
 
@@ -26,13 +71,17 @@ const GameDetail = () => {
           <Stats>
             <div className="rating">
               <h3>{game.name}</h3>
-              <p>Rating: {game.rating}</p>
+              {getRatings()}
             </div>
             <Info>
               <h3>Platforms</h3>
               <Platforms>
                 {game.platforms.map((data) => (
-                  <h3 key={data.platform.id}>{data.platform.name}</h3>
+                  <img
+                    alt={data.platform.name}
+                    key={data.platform.id}
+                    src={getPlatform(data.platform.name)}
+                  />
                 ))}
               </Platforms>
             </Info>
@@ -75,7 +124,7 @@ const CardShadow = styled(motion.div)`
     width: 0.5rem;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #ff7676;
+    background-color: #ee4141;
   }
   ::-webkit-scrollbar-track {
     background-color: white;
@@ -97,6 +146,10 @@ const Stats = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  img {
+    width: 1rem;
+    display: inline;
+  }
 `
 const Info = styled(motion.div)`
   text-align: center;
@@ -122,24 +175,6 @@ const Description = styled(motion.div)`
 const Gallery = styled(motion.div)`
   img {
     margin-bottom: 2rem;
-  }
-`
-const BackButton = styled(motion.div)`
-  top: 2%;
-  right: 2%;
-  display: inline-block;
-  position: fixed;
-
-  padding: 0.5rem 0.8rem;
-  border-radius: 0.5rem;
-  border: 1px solid gray;
-  font-weight: 500;
-  color: white;
-  background-color: #080808;
-  transition: 0.3s ease;
-  &:hover {
-    background-color: white;
-    color: black;
   }
 `
 

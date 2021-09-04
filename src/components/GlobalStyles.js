@@ -13,7 +13,7 @@ html{
         width: 0.5rem;
     }
     &::-webkit-scrollbar-thumb{
-        background-color: darkgray;
+        background-color: #2b2a2a;
     }
 }
 body{
@@ -24,6 +24,10 @@ h2{
     font-size: 2.8rem;
     color: #333;
 
+}
+input{
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
 }
 h3{
     font-size: 1.1rem;

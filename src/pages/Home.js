@@ -20,11 +20,11 @@ const Home = () => {
   }, [dispatch])
 
   const { popular, newGames, upcoming } = useSelector((state) => state.games)
-  const { game } = useSelector((state) => state.detail)
 
   return (
     <GameList>
       {gameId && <GameDetail />}
+
       <h2>Upcoming Games</h2>
       <Games>
         {upcoming.map((game) => (
