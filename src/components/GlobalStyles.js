@@ -32,11 +32,12 @@ input{
 h3{
     font-size: 1.1rem;
     color: #333;
-    padding:1rem 0rem;
+    padding:0.5rem 0rem;
 }
 p{
     line-height: 200%;
     color: #696969;
+    padding-bottom: 0.2rem;
     
 }
 a{

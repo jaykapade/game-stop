@@ -19,7 +19,7 @@ import gamepad from '../logos/gamepad.svg'
 import starEmpty from '../logos/star-empty.png'
 import starFull from '../logos/star-full.png'
 
-const GameDetail = () => {
+const GameDetail = ({ gameId }) => {
   const history = useHistory()
 
   //Exit GameDetail Page
@@ -67,7 +67,7 @@ const GameDetail = () => {
   return (
     <CardShadow className="shadow" onClick={exitDetailHandler}>
       {!isLoading && (
-        <Detail>
+        <Detail layoutId={gameId}>
           <Stats>
             <div className="rating">
               <h3>{game.name}</h3>
@@ -87,7 +87,8 @@ const GameDetail = () => {
             </Info>
           </Stats>
           <Media>
-            <img
+            <motion.img
+              layoutId={`image ${gameId}`}
               src={resizeImage(game.background_image, 1280)}
               alt={game.background_image}
             />
@@ -116,6 +117,7 @@ const CardShadow = styled(motion.div)`
   min-height: 100vh;
   overflow-y: scroll;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
 
   position: fixed;
   top: 0;
