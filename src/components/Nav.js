@@ -7,7 +7,6 @@ import logo from '../logos/logo.gif'
 
 import { fetchSearchedGames } from '../redux/actions/gamesAction'
 import { useDispatch } from 'react-redux'
-import { CLEAR_SEARCH_RESULTS } from '../redux/constants/gamesConstant'
 
 import { fadeIn } from '../animations'
 
